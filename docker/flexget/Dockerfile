@@ -1,6 +1,7 @@
 FROM python:3-slim-buster
 
-WORKDIR /home/flexget
+ENV      HOME /home/flexget
+WORKDIR  ${HOME}
 
 VOLUME   /home/flexget/.flexget
 VOLUME   /home/flexget/torrents
@@ -8,8 +9,8 @@ VOLUME   /home/flexget/torrents
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY     start.sh /home/flexget/
+COPY     start.sh .
 RUN      chmod +x ./start.sh
 
-USER     flexget
+USER     1029
 CMD      ["./start.sh"]
